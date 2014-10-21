@@ -52,7 +52,7 @@
 		add_shape_to = function(canvas, shape, coords, options, name) {
 			var i, context = canvas.getContext('2d');
 			
-			// MODIFIED - added customRender
+			//  Added customRender to let client code render into canvas
 			if(options.customRender){
 				return options.customRender(canvas, context, coords, options);
 			}

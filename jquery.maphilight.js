@@ -241,10 +241,11 @@
 			if(img.hasClass('maphilighted')) {
 				// We're redrawing an old map, probably to pick up changes to the options.
 				// Just clear out all the old stuff.
-				var wrapper = img.parent();
+				var wrapper = img.parent();		
 				img.insertBefore(wrapper);
 				wrapper.remove();
 				$(map).unbind('.maphilight').find('area[coords]').unbind('.maphilight');
+				img.removeClass('maphilighted');
 			}
 
 			wrap = $('<div></div>').css({
@@ -253,9 +254,10 @@
 				backgroundSize: '100% 100%',
 				position:'relative',
 				padding:0,
-				width:this.width,
-				height:this.height
+				width:img.width(),
+				height:img.height()
 				});
+	
 			if(options.wrapClass) {
 				if(options.wrapClass === true) {
 					wrap.addClass($(this).attr('class'));
@@ -269,8 +271,8 @@
 			
 			canvas = create_canvas_for(this);
 			$(canvas).css(canvas_style);
-			canvas.height = this.height;
-			canvas.width = this.width;
+			canvas.height = img.height();
+			canvas.width = img.width();
 			
 			mouseover = function(e) {
 				var shape, area_options;

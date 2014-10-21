@@ -52,6 +52,11 @@
 		add_shape_to = function(canvas, shape, coords, options, name) {
 			var i, context = canvas.getContext('2d');
 			
+			// MODIFIED - added customRender
+			if(options.customRender){
+				return options.customRender(canvas, context, coords, options);
+			}
+			
 			// Because I don't want to worry about setting things back to a base state
 			
 			// Shadow has to happen first, since it's on the bottom, and it does some clip /

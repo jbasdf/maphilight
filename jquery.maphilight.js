@@ -215,6 +215,20 @@
 			var img, wrap, options, map, canvas, canvas_always, mouseover, highlighted_shape, usemap;
 			img = $(this);
 
+			if(img.hasClass('maphilighted')) {
+				// We're redrawing an old map, probably to pick up changes to the options.
+				// Just clear out all the old stuff.
+				var wrapper = img.parent();		
+				img.insertBefore(wrapper);
+				wrapper.remove();
+				$(map).unbind('.maphilight').find('area[coords]').unbind('.maphilight');
+				img.removeClass('maphilighted');
+			}
+
+			if(opts.destroy){
+				return;
+			}
+
 			if(!is_image_loaded(this)) {
 				// If the image isn't fully loaded, this won't work right.  Try again later.
 				return window.setTimeout(function() {
@@ -236,16 +250,6 @@
 
 			if(!(img.is('img,input[type="image"]') && usemap && map.size() > 0)) {
 				return;
-			}
-
-			if(img.hasClass('maphilighted')) {
-				// We're redrawing an old map, probably to pick up changes to the options.
-				// Just clear out all the old stuff.
-				var wrapper = img.parent();		
-				img.insertBefore(wrapper);
-				wrapper.remove();
-				$(map).unbind('.maphilight').find('area[coords]').unbind('.maphilight');
-				img.removeClass('maphilighted');
 			}
 
 			wrap = $('<div></div>').css({

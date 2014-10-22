@@ -330,8 +330,8 @@
 						if(!canvas_always && has_canvas) {
 							canvas_always = create_canvas_for(img[0]);
 							$(canvas_always).css(canvas_style);
-							canvas_always.width = img[0].width;
-							canvas_always.height = img[0].height;
+							canvas_always.width = img.width();
+							canvas_always.height = img.height();
 							img.before(canvas_always);
 						}
 						area_options.fade = area_options.alwaysOnFade; // alwaysOn shouldn't fade in initially

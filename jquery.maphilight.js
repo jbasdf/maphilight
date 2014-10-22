@@ -252,6 +252,10 @@
 			}
 
 			map = $('map[name="'+usemap.substr(1)+'"]');
+			if(map.size() <= 0){
+				// In case the user didn't include a '#' on the usemap attribute
+				map = $('map[name="'+usemap+'"]');
+			}
 
 			if(!(img.is('img,input[type="image"]') && usemap && map.size() > 0)) {
 				return;

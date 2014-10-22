@@ -219,14 +219,19 @@
 				// We're redrawing an old map, probably to pick up changes to the options.
 				// Just clear out all the old stuff.
 				var wrapper = img.parent();		
+				img.removeClass('maphilighted');
+				img.attr('style', img.attr('data-original-style')); // Reset the image's original style settings
 				img.insertBefore(wrapper);
 				wrapper.remove();
-				$(map).unbind('.maphilight').find('area[coords]').unbind('.maphilight');
-				img.removeClass('maphilighted');
+				$(map).unbind('.maphilight').find('area[coords]').unbind('.maphilight');				
 			}
 
 			if(opts.destroy){
 				return;
+			}
+
+			if(!img.attr('data-original-style')){
+				img.attr('data-original-style', img.attr('style'));
 			}
 
 			if(!is_image_loaded(this)) {
